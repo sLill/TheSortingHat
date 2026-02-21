@@ -1,0 +1,117 @@
+server:
+  port: 8080
+
+# Each entry under `releases` describes one version that may be served.
+# The server always serves the HIGHEST eligible version to any given client.
+#
+# Rollout rules use OR logic: a client receives the update if it matches
+# ANY of the listed conditions. Omitting `rollout` entirely means all clients
+# are eligible (full general availability release).
+releases:
+
+  # --------------------------------------------------------------------------
+  # 1. Full GA release — no rollout block means everyone gets it.
+  # --------------------------------------------------------------------------
+  - version: "1.0.0"
+    notes: "Initial release"
+    pub_date: "2024-01-01T00:00:00Z"
+    platforms:
+      linux-x86_64:
+        url: "https://studwell.me/releases/app_1.0.0_linux_x86_64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      darwin-x86_64:
+        url: "https://studwell.me/releases/app_1.0.0_macos_x86_64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      darwin-aarch64:
+        url: "https://studwell.me/releases/app_1.0.0_macos_aarch64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      windows-x86_64:
+        url: "https://studwell.me/releases/app_1.0.0_windows_x86_64.msi"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+
+  # --------------------------------------------------------------------------
+  # 2. Customer-specific beta — only "acme" and "globex" see this version.
+  # --------------------------------------------------------------------------
+  - version: "1.1.0-beta"
+    notes: "New dashboard (beta)"
+    pub_date: "2024-03-01T00:00:00Z"
+    platforms:
+      linux-x86_64:
+        url: "https://studwell.me/releases/app_1.1.0-beta_linux_x86_64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      windows-x86_64:
+        url: "https://studwell.me/releases/app_1.1.0-beta_windows_x86_64.msi"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+    rollout:
+      customers:
+        - acme
+        - globex
+
+  # --------------------------------------------------------------------------
+  # 3. Region rollout — only machines in us-east or eu-west get this.
+  # --------------------------------------------------------------------------
+  - version: "1.1.0"
+    notes: "New dashboard"
+    pub_date: "2024-04-01T00:00:00Z"
+    platforms:
+      linux-x86_64:
+        url: "https://studwell.me/releases/app_1.1.0_linux_x86_64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      darwin-x86_64:
+        url: "https://studwell.me/releases/app_1.1.0_macos_x86_64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      darwin-aarch64:
+        url: "https://studwell.me/releases/app_1.1.0_macos_aarch64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      windows-x86_64:
+        url: "https://studwell.me/releases/app_1.1.0_windows_x86_64.msi"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+    rollout:
+      regions:
+        - us-east
+        - eu-west
+
+  # --------------------------------------------------------------------------
+  # 4. Percentage rollout — 10 % canary, then bump to 50 %, then remove rollout
+  #    entirely for full GA. The same machine always lands in the same bucket
+  #    for this version (deterministic via FNV hash of machine-id + version).
+  # --------------------------------------------------------------------------
+  - version: "1.2.0"
+    notes: "Performance improvements"
+    pub_date: "2024-06-01T00:00:00Z"
+    platforms:
+      linux-x86_64:
+        url: "https://studwell.me/releases/app_1.2.0_linux_x86_64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      darwin-x86_64:
+        url: "https://studwell.me/releases/app_1.2.0_macos_x86_64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      darwin-aarch64:
+        url: "https://studwell.me/releases/app_1.2.0_macos_aarch64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      windows-x86_64:
+        url: "https://studwell.me/releases/app_1.2.0_windows_x86_64.msi"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+    rollout:
+      percentage: 10   # raise to 50, then 100, or remove `rollout` for full GA
+
+  # --------------------------------------------------------------------------
+  # 5. Combined — specific customers OR a 20 % canary OR a specific region.
+  #    Any one matching condition is sufficient.
+  # --------------------------------------------------------------------------
+  - version: "1.3.0-rc"
+    notes: "Release candidate"
+    pub_date: "2024-09-01T00:00:00Z"
+    platforms:
+      linux-x86_64:
+        url: "https://studwell.me/releases/app_1.3.0-rc_linux_x86_64.tar.gz"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+      windows-x86_64:
+        url: "https://studwell.me/releases/app_1.3.0-rc_windows_x86_64.msi"
+        signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
+    rollout:
+      customers:
+        - acme
+      regions:
+        - us-east
+      percentage: 20
