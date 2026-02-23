@@ -101,11 +101,17 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	asset := bestRelease.Platforms[platform]
+
+	downloadURL := asset.URL
+	if sas := cfg.AzureSASToken; sas != "" {
+		downloadURL = asset.URL + "?" + sas
+	}
+
 	resp := updateResponse{
 		Version:   bestRelease.Version,
 		Notes:     bestRelease.Notes,
 		PubDate:   bestRelease.PubDate,
-		URL:       asset.URL,
+		URL:       downloadURL,
 		Signature: asset.Signature,
 	}
 
