@@ -46,8 +46,9 @@ type ServerConfig struct {
 
 // Config is the top-level structure of the YAML config file.
 type Config struct {
-	Server   ServerConfig `yaml:"server"`
-	Releases []Release    `yaml:"releases"`
+	Server         ServerConfig `yaml:"server"`
+	AzureSASToken  string       `yaml:"azure_sas_token"`
+	Releases       []Release    `yaml:"releases"`
 }
 
 // ConfigStore holds the current config and provides thread-safe access.

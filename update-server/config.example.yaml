@@ -1,6 +1,14 @@
 server:
   port: 8080
 
+# SAS token for your Azure Blob Storage container.
+# Tauri will use this to authenticate the artifact download.
+# Generate one in the Azure portal: Storage account → Shared access signature.
+# Recommended permissions: Read only. Set an appropriate expiry.
+# The token is appended as a query string to every download URL, e.g.:
+#   https://<account>.blob.core.windows.net/<container>/<blob>?<token>
+azure_sas_token: "sv=2022-11-02&ss=b&srt=o&sp=r&se=2025-12-31T00:00:00Z&spr=https&sig=REPLACE_ME"
+
 # Each entry under `releases` describes one version that may be served.
 # The server always serves the HIGHEST eligible version to any given client.
 #
@@ -17,16 +25,16 @@ releases:
     pub_date: "2024-01-01T00:00:00Z"
     platforms:
       linux-x86_64:
-        url: "https://studwell.me/releases/app_1.0.0_linux_x86_64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.0.0_linux_x86_64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       darwin-x86_64:
-        url: "https://studwell.me/releases/app_1.0.0_macos_x86_64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.0.0_macos_x86_64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       darwin-aarch64:
-        url: "https://studwell.me/releases/app_1.0.0_macos_aarch64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.0.0_macos_aarch64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       windows-x86_64:
-        url: "https://studwell.me/releases/app_1.0.0_windows_x86_64.msi"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.0.0_windows_x86_64.msi"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
 
   # --------------------------------------------------------------------------
@@ -37,10 +45,10 @@ releases:
     pub_date: "2024-03-01T00:00:00Z"
     platforms:
       linux-x86_64:
-        url: "https://studwell.me/releases/app_1.1.0-beta_linux_x86_64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.1.0-beta_linux_x86_64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       windows-x86_64:
-        url: "https://studwell.me/releases/app_1.1.0-beta_windows_x86_64.msi"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.1.0-beta_windows_x86_64.msi"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
     rollout:
       customers:
@@ -55,16 +63,16 @@ releases:
     pub_date: "2024-04-01T00:00:00Z"
     platforms:
       linux-x86_64:
-        url: "https://studwell.me/releases/app_1.1.0_linux_x86_64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.1.0_linux_x86_64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       darwin-x86_64:
-        url: "https://studwell.me/releases/app_1.1.0_macos_x86_64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.1.0_macos_x86_64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       darwin-aarch64:
-        url: "https://studwell.me/releases/app_1.1.0_macos_aarch64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.1.0_macos_aarch64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       windows-x86_64:
-        url: "https://studwell.me/releases/app_1.1.0_windows_x86_64.msi"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.1.0_windows_x86_64.msi"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
     rollout:
       regions:
@@ -81,16 +89,16 @@ releases:
     pub_date: "2024-06-01T00:00:00Z"
     platforms:
       linux-x86_64:
-        url: "https://studwell.me/releases/app_1.2.0_linux_x86_64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.2.0_linux_x86_64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       darwin-x86_64:
-        url: "https://studwell.me/releases/app_1.2.0_macos_x86_64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.2.0_macos_x86_64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       darwin-aarch64:
-        url: "https://studwell.me/releases/app_1.2.0_macos_aarch64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.2.0_macos_aarch64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       windows-x86_64:
-        url: "https://studwell.me/releases/app_1.2.0_windows_x86_64.msi"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.2.0_windows_x86_64.msi"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
     rollout:
       percentage: 10   # raise to 50, then 100, or remove `rollout` for full GA
@@ -104,10 +112,10 @@ releases:
     pub_date: "2024-09-01T00:00:00Z"
     platforms:
       linux-x86_64:
-        url: "https://studwell.me/releases/app_1.3.0-rc_linux_x86_64.tar.gz"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.3.0-rc_linux_x86_64.tar.gz"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
       windows-x86_64:
-        url: "https://studwell.me/releases/app_1.3.0-rc_windows_x86_64.msi"
+        url: "https://ACCOUNT.blob.core.windows.net/CONTAINER/app_1.3.0-rc_windows_x86_64.msi"
         signature: "PASTE_BASE64_MINISIGN_SIG_HERE"
     rollout:
       customers:
