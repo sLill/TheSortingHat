@@ -1,0 +1,5 @@
+# compiled binary
+update-server
+
+# local config (only commit the example)
+config.yaml
