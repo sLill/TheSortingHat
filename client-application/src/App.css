@@ -1,0 +1,199 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #0f0f0f;
+  background-color: #f6f6f6;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 480px;
+  padding: 10vh 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin: 0 0 0.75rem;
+}
+
+/* ── Update banner ── */
+.update-banner {
+  width: 100%;
+}
+
+.version-label {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-bottom: 1.25rem;
+}
+
+.status-text.checking {
+  opacity: 0.7;
+}
+
+.status-block {
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.status-block.up-to-date {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.status-block.available {
+  background: #fff3e0;
+  border: 1px solid #ffcc80;
+}
+
+.status-block.downloading {
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status-block.ready {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+}
+
+.status-block.error {
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+}
+
+.release-notes {
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  margin: 0.5rem 0 1rem;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+/* ── Progress bar ── */
+progress {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  appearance: none;
+}
+progress::-webkit-progress-bar {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+progress::-webkit-progress-value {
+  background: #1976d2;
+  border-radius: 5px;
+}
+
+/* ── Buttons ── */
+.button-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.5em 1.1em;
+  font-size: 0.95em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn.primary {
+  background-color: #1976d2;
+  color: #fff;
+}
+.btn.primary:hover {
+  background-color: #1565c0;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  border-color: #999;
+  color: inherit;
+}
+.btn.secondary:hover {
+  border-color: #555;
+}
+
+/* ── Dark mode ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #f6f6f6;
+    background-color: #1e1e1e;
+  }
+
+  .status-block.up-to-date {
+    background: #1b3a1f;
+    border-color: #388e3c;
+  }
+
+  .status-block.available {
+    background: #3e2c00;
+    border-color: #f9a825;
+  }
+
+  .status-block.downloading {
+    background: #0d2137;
+    border-color: #1565c0;
+  }
+
+  .status-block.ready {
+    background: #1b3a1f;
+    border-color: #388e3c;
+  }
+
+  .status-block.error {
+    background: #3b0f0f;
+    border-color: #c62828;
+  }
+
+  .release-notes {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  progress::-webkit-progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .btn.secondary {
+    border-color: #666;
+  }
+  .btn.secondary:hover {
+    border-color: #ccc;
+  }
+}
